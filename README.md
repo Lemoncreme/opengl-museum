@@ -1,2 +1,2 @@
-# opengl-museum
-CSE389 project
+# CSE389 OpenGL Museum Project
+Nyna Dunning & Benjamin Mastripolito
