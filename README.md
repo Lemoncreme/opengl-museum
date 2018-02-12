@@ -1,6 +1,9 @@
 # CSE389 OpenGL Museum Project
 Nyna Dunning & Benjamin Mastripolito
 
+# Museum Model
+[Link to museum model](https://github.com/Lemoncreme/opengl-museum/blob/master/museum_final.blend)
+
 # Screenshots
 
 ![](https://github.com/Lemoncreme/opengl-museum/blob/master/Screenshot%20(836).png)
