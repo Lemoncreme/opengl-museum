@@ -31,7 +31,7 @@ int main(){
     // ------------------------------
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // glfw window creation
@@ -44,7 +44,13 @@ int main(){
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+glewExperimental = true;
 
+if (glewInit() != GLEW_OK) {
+	fprintf(stderr, "Failed to init GLEW\n");
+	glfwTerminate();
+	return -1;
+}
     // build and compile our shader program
     // ------------------------------------
     // vertex shader
