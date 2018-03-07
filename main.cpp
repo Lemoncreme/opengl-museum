@@ -13,7 +13,7 @@ void processInput(GLFWwindow* window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 GLfloat theta[3] = {0, 0, 0};
-const GLsizei MODELS = 3;
+const GLsizei MODELS = 4;
 GLuint VAO[MODELS];
 GLint modelSelection = 0;
 
@@ -151,6 +151,9 @@ int main(){
 	glBindVertexArray(VAO[2]);
 	models[2] = Object("thinker.obj");
 	models[2].load(shaderProgram);
+	glBindVertexArray(VAO[3]);
+	models[3] = Object("museum.obj");
+	models[3].load(shaderProgram);
 
 	//uniforms
 	GLint thetaUniform = glGetUniformLocation(shaderProgram, "theta");
