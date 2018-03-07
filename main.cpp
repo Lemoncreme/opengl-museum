@@ -12,13 +12,39 @@ void processInput(GLFWwindow* window);
 //settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+GLfloat theta[3] = {0, 0, 0};
+const GLsizei MODELS = 3;
+GLuint VAO[MODELS];
+GLint modelSelection = 0;
 
-const char *vertexShaderSource = "#version 330 core\n"
-	"layout (location = 0) in vec3 aPos;\n"
-	"void main()\n"
-	"{\n"
-	"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-	"}\0";
+const char *vertexShaderSource = "#version 150\n"
+		"in vec4 vPosition;\n"
+		"in vec4 vColor;\n"
+		"out vec4 color;\n"
+		"uniform vec3 theta;\n"
+		"void main()\n"
+		"{\n"
+		"   //Compute the sines and cosines of theta for each of\n"
+		"   //the three axes in one computation.\n"
+		"   vec3 angles = radians(theta);\n"
+		"   vec3 c = cos(angles);\n"
+		"   vec3 s = sin(angles);\n"
+		"   //Remember: these matrices are column major.\n"
+		"   mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,\n"
+		"                  0.0, c.x, s.x, 0.0,\n"
+		"                  0.0, -s.x, c.x, 0.0,\n"
+		"                  0.0, 0.0, 0.0, 1.0);\n"
+		"   mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,\n"
+		"                  0.0, 1.0, 0.0, 0.0,\n"
+		"                  s.y, 0.0, c.y, 0.0,\n"
+		"                  0.0, 0.0, 0.0, 1.0);\n"
+		"   mat4 rz = mat4(c.z, -s.z, 0.0, 0.0,\n"
+		"                  s.z, c.z, 0.0, 0.0,\n"
+		"                  0.0, 0.0, 1.0, 0.0,\n"
+		"                  0.0, 0.0, 0.0, 1.0);\n"
+		"   color = vColor;\n"
+		"   gl_Position = rz * ry * rx * vPosition;\n"
+		"}\0";
 
 const char *fragmentShaderSource = "#version 330 core\n"
 	"out vec4 FragColor;\n"
@@ -27,6 +53,16 @@ const char *fragmentShaderSource = "#version 330 core\n"
 	"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
 	"}\n\0";
 
+
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		exit(EXIT_SUCCESS);
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+		modelSelection = (modelSelection + 1) % MODELS;
+		glBindVertexArray(VAO[modelSelection]);
+	}
+} // end key_callback()
 
 int main(){
 	//Initialize GLFW
@@ -102,14 +138,25 @@ int main(){
 	glDeleteShader(fragmentShader);
 
 	//VAOs
-	GLsizei MODELS = 1;
-	GLuint VAO[MODELS];
 	glGenVertexArrays(MODELS, VAO);
 
 	//Load cube object
+	Object models[MODELS];
 	glBindVertexArray(VAO[0]);
-	Object cube("cube.obj");
-	cube.load(shaderProgram);
+	models[0] = Object("cube.obj");
+	models[0].load(shaderProgram);
+	glBindVertexArray(VAO[1]);
+	models[1] = Object("Pikachu.obj");
+	models[1].load(shaderProgram);
+	glBindVertexArray(VAO[2]);
+	models[2] = Object("thinker.obj");
+	models[2].load(shaderProgram);
+
+	//uniforms
+	GLint thetaUniform = glGetUniformLocation(shaderProgram, "theta");
+
+	//bind callbacks
+	glfwSetKeyCallback(window, keyCallback);
 
 	//Rendering
 	while(!glfwWindowShouldClose(window)){
@@ -123,12 +170,17 @@ int main(){
 
 		// Try to draw the cube
 		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO[0]);
-		cube.draw();
+		glBindVertexArray(VAO[modelSelection]);
+		glUniform3fv(thetaUniform, 1, theta);
+		models[modelSelection].draw();
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
+		theta[0] += 0.5;
+		theta[1] += 0.5;
+		theta[2] += 0.5;
 	}
 
 	glfwTerminate();
