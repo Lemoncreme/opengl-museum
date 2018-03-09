@@ -6,7 +6,9 @@
 
 #include "Object.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+void windowSizeCallback(GLFWwindow* window, int width, int height);
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void processInput(GLFWwindow* window);
 
 //settings
@@ -54,16 +56,6 @@ const char *fragmentShaderSource = "#version 330 core\n"
 	"}\n\0";
 
 
-void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		exit(EXIT_SUCCESS);
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
-		modelSelection = (modelSelection + 1) % MODELS;
-		glBindVertexArray(VAO[modelSelection]);
-	}
-} // end key_callback()
-
 int main(){
 	//Initialize GLFW
 	glfwInit();
@@ -82,8 +74,9 @@ int main(){
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	
+	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+	glfwSetWindowSizeCallback(window, windowSizeCallback);
+
 	//Initialize GLEW
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK) {
@@ -199,9 +192,24 @@ void processInput(GLFWwindow* window){
 }
 
 //glfw: whenever the window size changed (by OS or user resize) this callback function executes
-void framebuffer_size_callback(GLFWwindow* window, int width, int height){
-
+void framebufferSizeCallback(GLFWwindow* window, int width, int height){
+	printf("FRAMEBUFFER SIZE %d %d\n", width, height);
 	// make sure the viewport matches the new window dimensions; note that width and
 	// height will be significantly larger than specified on retina displays.
+	glViewport(0,0,width, height);
+}
+
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		exit(EXIT_SUCCESS);
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+		modelSelection = (modelSelection + 1) % MODELS;
+		glBindVertexArray(VAO[modelSelection]);
+	}
+}
+
+void windowSizeCallback(GLFWwindow* window, int width, int height) {
+	printf("WINDOW SIZE %d %d\n", width, height);
+	glfwSetWindowSize(window, width, height);
 	glViewport(0,0,width, height);
 }
