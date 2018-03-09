@@ -5,11 +5,11 @@ Nyna Dunning & Benjamin Mastripolito
 [Link to museum model](https://github.com/Lemoncreme/opengl-museum/blob/master/museum_final.blend)
 
 # Screenshots
-![](https://github.com/Lemoncreme/opengl-museum/blob/master/Screenshot%20from%202018-03-07%2014-31-24.png)
-![](https://github.com/Lemoncreme/opengl-museum/blob/master/Screenshot%20from%202018-03-07%2014-31-14.png)
-![](https://github.com/Lemoncreme/opengl-museum/blob/master/Screenshot%20from%202018-03-07%2014-31-10.png)
-![](https://github.com/Lemoncreme/opengl-museum/blob/master/Screenshot%20(836).png)
-![](https://github.com/Lemoncreme/opengl-museum/blob/master/Screenshot%20(837).png)
+![](./ss_obj3.png)
+![](./ss_obj2.png)
+![](./ss_obj1.png)
+![](./ss_tri2.png)
+![](./ss_tri1.png)
 
 ## Museum Plan
 
