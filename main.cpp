@@ -18,12 +18,15 @@ GLfloat theta[3] = {0, 0, 0};
 const GLsizei MODELS = 4;
 GLuint VAO[MODELS];
 GLint modelSelection = 0;
+double mousex = 0;
+double mousey = 0;
 
 const char *vertexShaderSource = "#version 150\n"
 		"in vec4 vPosition;\n"
 		"in vec4 vColor;\n"
 		"out vec4 color;\n"
 		"uniform vec3 theta;\n"
+		"varying vec4 vWorld;\n"
 		"void main()\n"
 		"{\n"
 		"   //Compute the sines and cosines of theta for each of\n"
@@ -46,13 +49,15 @@ const char *vertexShaderSource = "#version 150\n"
 		"                  0.0, 0.0, 0.0, 1.0);\n"
 		"   color = vColor;\n"
 		"   gl_Position = rz * ry * rx * vPosition;\n"
+		"   vWorld = gl_Position;\n"
 		"}\0";
 
 const char *fragmentShaderSource = "#version 330 core\n"
 	"out vec4 FragColor;\n"
+	"varying vec4 vWorld;\n"
 	"void main()\n"
 	"{\n"
-	"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+	"   FragColor = vec4(1.0f, abs(vWorld.y / 1.5f), 0.2f, 1.0f);\n"
 	"}\n\0";
 
 
@@ -159,6 +164,7 @@ int main(){
 
 		// Process window input
 		processInput(window);
+		glfwGetCursorPos(window, &mousex, &mousey);
 
 		// Clear buffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -174,9 +180,8 @@ int main(){
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
-		theta[0] += 0.5;
-		theta[1] += 0.5;
-		theta[2] += 0.5;
+		theta[0] = mousey / 4.0;
+		theta[1] = 360.0 - mousex / 4.0;
 	}
 
 	glfwTerminate();
