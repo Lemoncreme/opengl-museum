@@ -3,6 +3,7 @@ in vec4 vPosition;
 in vec4 vColor;
 out vec4 color;
 uniform vec3 theta;
+uniform vec2 scale;
 varying vec4 vWorld;
 void main()
 {
@@ -24,7 +25,8 @@ void main()
 		  s.z, c.z, 0.0, 0.0,
 		  0.0, 0.0, 1.0, 0.0,
 		  0.0, 0.0, 0.0, 1.0);
+    mat4 scalemat = mat4(mat2(scale[0], 0, 0, scale[1]));
 	color = vColor;
-	gl_Position = rz * ry * rx * vPosition;
+	gl_Position = scalemat * rz * ry * rx * vPosition;
 	vWorld = gl_Position;
-};
+}

@@ -17,6 +17,7 @@ void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 GLfloat theta[3] = {0, 0, 0};
+GLfloat scale[2] = {0.5, 0.5};
 const GLsizei MODELS = 4;
 GLuint VAO[MODELS];
 GLint modelSelection = 0;
@@ -26,52 +27,36 @@ bool leftClick = false;
 bool rightClick = false;
 double mousedx = 0;
 double mousedy = 0;
+double scroll = 1;
 
-const char *vertexShaderSource = "#version 150\n"
-		"in vec4 vPosition;\n"
-		"in vec4 vColor;\n"
-		"out vec4 color;\n"
-		"uniform vec3 theta;\n"
-		"varying vec4 vWorld;\n"
-		"void main()\n"
-		"{\n"
-		"   //Compute the sines and cosines of theta for each of\n"
-		"   //the three axes in one computation.\n"
-		"   vec3 angles = radians(theta);\n"
-		"   vec3 c = cos(angles);\n"
-		"   vec3 s = sin(angles);\n"
-		"   //Remember: these matrices are column major.\n"
-		"   mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,\n"
-		"                  0.0, c.x, s.x, 0.0,\n"
-		"                  0.0, -s.x, c.x, 0.0,\n"
-		"                  0.0, 0.0, 0.0, 1.0);\n"
-		"   mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,\n"
-		"                  0.0, 1.0, 0.0, 0.0,\n"
-		"                  s.y, 0.0, c.y, 0.0,\n"
-		"                  0.0, 0.0, 0.0, 1.0);\n"
-		"   mat4 rz = mat4(c.z, -s.z, 0.0, 0.0,\n"
-		"                  s.z, c.z, 0.0, 0.0,\n"
-		"                  0.0, 0.0, 1.0, 0.0,\n"
-		"                  0.0, 0.0, 0.0, 1.0);\n"
-		"   color = vColor;\n"
-		"   gl_Position = rz * ry * rx * vPosition;\n"
-		"   vWorld = gl_Position;\n"
-		"}\0";
-
-const char *fragmentShaderSource = "#version 330 core\n"
-	"out vec4 FragColor;\n"
-	"varying vec4 vWorld;\n"
-	"void main()\n"
-	"{\n"
-	"   FragColor = vec4(1.0f, abs(vWorld.y / 1.5f), 0.2f, 1.0f);\n"
-	"}\n\0";
+char *vertexShaderSource;
+char *fragmentShaderSource;
 
 
 int main(){
 	//Initialize GLFW
 	glfwInit();
 
-	//OpenGL version hints
+    //read in from file
+    FILE *vertexShaderFile = fopen("shader.vert", "r");
+    fseek(vertexShaderFile, 0, SEEK_END);
+    long fsize = ftell(vertexShaderFile);
+    fseek(vertexShaderFile, 0, SEEK_SET);  //same as rewind(f);
+
+    vertexShaderSource = (char *) malloc(fsize + 1);
+    fread(vertexShaderSource, fsize, 1, vertexShaderFile);
+    fclose(vertexShaderFile);
+
+    FILE *fragmentShaderFile = fopen("shader.frag", "r");
+    fseek(fragmentShaderFile, 0, SEEK_END);
+    fsize = ftell(fragmentShaderFile);
+    fseek(fragmentShaderFile, 0, SEEK_SET);  //same as rewind(f);
+
+    fragmentShaderSource = (char *) malloc(fsize + 1);
+    fread(fragmentShaderSource, fsize, 1, fragmentShaderFile);
+    fclose(fragmentShaderFile);
+
+    //OpenGL version hints
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -161,10 +146,12 @@ int main(){
 
 	//uniforms
 	GLint thetaUniform = glGetUniformLocation(shaderProgram, "theta");
+    GLint scaleUniform = glGetUniformLocation(shaderProgram, "scale");
 
 	//bind callbacks
 	glfwSetKeyCallback(window, keyCallback);
 	glfwSetMouseButtonCallback(window, mouseCallback);
+    glfwSetScrollCallback(window, scrollCallback);
 	//Rendering
 	while(!glfwWindowShouldClose(window)){
 
@@ -184,6 +171,7 @@ int main(){
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO[modelSelection]);
 		glUniform3fv(thetaUniform, 1, theta);
+        glUniform2fv(scaleUniform, 1, scale);
 		models[modelSelection].draw();
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -194,6 +182,8 @@ int main(){
 			theta[0] -= mousedy / 4.0;
 			theta[1] += mousedx / 4.0;
 		}
+
+        scale[0] = (scale[1] = scroll);
 	}
 
 	glfwTerminate();
@@ -243,5 +233,5 @@ void mouseCallback(GLFWwindow* window, int button, int action, int mods){
 }
 
 void scrollCallback(GLFWwindow* window, double xoffset, double yoffset){
-
+    scroll += yoffset/10.0;
 }
