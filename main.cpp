@@ -10,6 +10,8 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 void windowSizeCallback(GLFWwindow* window, int width, int height);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void processInput(GLFWwindow* window);
+void mouseCallback(GLFWwindow* window, int button, int action, int mods);
+void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 
 //settings
 const unsigned int SCR_WIDTH = 800;
@@ -20,6 +22,10 @@ GLuint VAO[MODELS];
 GLint modelSelection = 0;
 double mousex = 0;
 double mousey = 0;
+bool leftClick = false;
+bool rightClick = false;
+double mousedx = 0;
+double mousedy = 0;
 
 const char *vertexShaderSource = "#version 150\n"
 		"in vec4 vPosition;\n"
@@ -158,13 +164,17 @@ int main(){
 
 	//bind callbacks
 	glfwSetKeyCallback(window, keyCallback);
-
+	glfwSetMouseButtonCallback(window, mouseCallback);
 	//Rendering
 	while(!glfwWindowShouldClose(window)){
 
 		// Process window input
 		processInput(window);
+		mousedx = mousex;
+		mousedy = mousey;
 		glfwGetCursorPos(window, &mousex, &mousey);
+		mousedx -= mousex;
+		mousedy -= mousey;
 
 		// Clear buffer
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -180,8 +190,10 @@ int main(){
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
-		theta[0] = mousey / 4.0;
-		theta[1] = 360.0 - mousex / 4.0;
+		if(leftClick){
+			theta[0] -= mousedy / 4.0;
+			theta[1] += mousedx / 4.0;
+		}
 	}
 
 	glfwTerminate();
@@ -217,4 +229,19 @@ void windowSizeCallback(GLFWwindow* window, int width, int height) {
 	printf("WINDOW SIZE %d %d\n", width, height);
 	glfwSetWindowSize(window, width, height);
 	glViewport(0,0,width, height);
+}
+
+void mouseCallback(GLFWwindow* window, int button, int action, int mods){
+	if (button == GLFW_MOUSE_BUTTON_LEFT) {
+		if (action == GLFW_PRESS) {
+			leftClick = true;
+		}
+		if (action == GLFW_RELEASE) {
+			leftClick = false;
+		}
+	}
+}
+
+void scrollCallback(GLFWwindow* window, double xoffset, double yoffset){
+
 }
