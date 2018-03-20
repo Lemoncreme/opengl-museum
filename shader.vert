@@ -1,30 +1,30 @@
-const char *vertexShaderSource = "#version 150\n"
-		"in vec4 vPosition;\n"
-		"in vec4 vColor;\n"
-		"out vec4 color;\n"
-		"uniform vec3 theta;\n"
-		"varying vec4 vWorld;\n"
-		"void main()\n"
-		"{\n"
-		"   //Compute the sines and cosines of theta for each of\n"
-		"   //the three axes in one computation.\n"
-		"   vec3 angles = radians(theta);\n"
-		"   vec3 c = cos(angles);\n"
-		"   vec3 s = sin(angles);\n"
-		"   //Remember: these matrices are column major.\n"
-		"   mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,\n"
-		"                  0.0, c.x, s.x, 0.0,\n"
-		"                  0.0, -s.x, c.x, 0.0,\n"
-		"                  0.0, 0.0, 0.0, 1.0);\n"
-		"   mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,\n"
-		"                  0.0, 1.0, 0.0, 0.0,\n"
-		"                  s.y, 0.0, c.y, 0.0,\n"
-		"                  0.0, 0.0, 0.0, 1.0);\n"
-		"   mat4 rz = mat4(c.z, -s.z, 0.0, 0.0,\n"
-		"                  s.z, c.z, 0.0, 0.0,\n"
-		"                  0.0, 0.0, 1.0, 0.0,\n"
-		"                  0.0, 0.0, 0.0, 1.0);\n"
-		"   color = vColor;\n"
-		"   gl_Position = rz * ry * rx * vPosition;\n"
-		"   vWorld = gl_Position;\n"
-		"}\0";
+#version 150
+in vec4 vPosition;
+in vec4 vColor;
+out vec4 color;
+uniform vec3 theta;
+varying vec4 vWorld;
+void main()
+{
+	//Compute the sines and cosines of theta for each of
+	//the three axes in one computation.
+	vec3 angles = radians(theta);
+	vec3 c = cos(angles);
+	vec3 s = sin(angles);
+	//Remember: these matrices are column major.
+	mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,
+		  0.0, c.x, s.x, 0.0,
+		  0.0, -s.x, c.x, 0.0,
+		  0.0, 0.0, 0.0, 1.0);
+	mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,
+		  0.0, 1.0, 0.0, 0.0,
+		  s.y, 0.0, c.y, 0.0,
+		  0.0, 0.0, 0.0, 1.0);
+	mat4 rz = mat4(c.z, -s.z, 0.0, 0.0,
+		  s.z, c.z, 0.0, 0.0,
+		  0.0, 0.0, 1.0, 0.0,
+		  0.0, 0.0, 0.0, 1.0);
+	color = vColor;
+	gl_Position = rz * ry * rx * vPosition;
+	vWorld = gl_Position;
+};
