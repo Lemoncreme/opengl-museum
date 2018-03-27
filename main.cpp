@@ -37,26 +37,26 @@ int main(){
 	//Initialize GLFW
 	glfwInit();
 
-    //read in from file
-    FILE *vertexShaderFile = fopen("shader.vert", "r");
-    fseek(vertexShaderFile, 0, SEEK_END);
-    long fsize = ftell(vertexShaderFile);
-    fseek(vertexShaderFile, 0, SEEK_SET);  //same as rewind(f);
+	//read in from file
+	FILE *vertexShaderFile = fopen("shader.vert", "r");
+	fseek(vertexShaderFile, 0, SEEK_END);
+	long fsize = ftell(vertexShaderFile);
+	fseek(vertexShaderFile, 0, SEEK_SET);  //same as rewind(f);
 
-    vertexShaderSource = (char *) malloc(fsize + 1);
-    fread(vertexShaderSource, fsize, 1, vertexShaderFile);
-    fclose(vertexShaderFile);
+	vertexShaderSource = (char *) malloc(fsize + 1);
+	fread(vertexShaderSource, fsize, 1, vertexShaderFile);
+	fclose(vertexShaderFile);
 
-    FILE *fragmentShaderFile = fopen("shader.frag", "r");
-    fseek(fragmentShaderFile, 0, SEEK_END);
-    fsize = ftell(fragmentShaderFile);
-    fseek(fragmentShaderFile, 0, SEEK_SET);  //same as rewind(f);
+	FILE *fragmentShaderFile = fopen("shader.frag", "r");
+	fseek(fragmentShaderFile, 0, SEEK_END);
+	fsize = ftell(fragmentShaderFile);
+	fseek(fragmentShaderFile, 0, SEEK_SET);  //same as rewind(f);
 
-    fragmentShaderSource = (char *) malloc(fsize + 1);
-    fread(fragmentShaderSource, fsize, 1, fragmentShaderFile);
-    fclose(fragmentShaderFile);
+	fragmentShaderSource = (char *) malloc(fsize + 1);
+	fread(fragmentShaderSource, fsize, 1, fragmentShaderFile);
+	fclose(fragmentShaderFile);
 
-    //OpenGL version hints
+	//OpenGL version hints
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -87,7 +87,7 @@ int main(){
 	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
-	
+
 	// check for shader compile errors
 	int success;
 	char infoLog[512];
@@ -146,12 +146,12 @@ int main(){
 
 	//uniforms
 	GLint thetaUniform = glGetUniformLocation(shaderProgram, "theta");
-    GLint scaleUniform = glGetUniformLocation(shaderProgram, "scale");
+	GLint scaleUniform = glGetUniformLocation(shaderProgram, "scale");
 
 	//bind callbacks
 	glfwSetKeyCallback(window, keyCallback);
 	glfwSetMouseButtonCallback(window, mouseCallback);
-    glfwSetScrollCallback(window, scrollCallback);
+	glfwSetScrollCallback(window, scrollCallback);
 	//Rendering
 	while(!glfwWindowShouldClose(window)){
 
@@ -171,7 +171,7 @@ int main(){
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO[modelSelection]);
 		glUniform3fv(thetaUniform, 1, theta);
-        glUniform2fv(scaleUniform, 1, scale);
+		glUniform2fv(scaleUniform, 1, scale);
 		models[modelSelection].draw();
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -183,7 +183,7 @@ int main(){
 			theta[1] += mousedx / 4.0;
 		}
 
-        scale[0] = (scale[1] = scroll);
+		scale[0] = (scale[1] = scroll);
 	}
 
 	glfwTerminate();
@@ -213,6 +213,12 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 		modelSelection = (modelSelection + 1) % MODELS;
 		glBindVertexArray(VAO[modelSelection]);
 	}
+	if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
+		scroll += 0.1;
+	}
+	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+		scroll -= 0.1;
+	}
 }
 
 void windowSizeCallback(GLFWwindow* window, int width, int height) {
@@ -233,5 +239,5 @@ void mouseCallback(GLFWwindow* window, int button, int action, int mods){
 }
 
 void scrollCallback(GLFWwindow* window, double xoffset, double yoffset){
-    scroll += yoffset/10.0;
+	scroll += yoffset/10.0;
 }
