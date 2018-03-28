@@ -1,8 +1,18 @@
 # CSE389 OpenGL Museum Project
 Nyna Dunning & Benjamin Mastripolito
 
+# How To Use
+Spacebar - Cycle through models
+Mouse Click - Mouse click and drag to rotate models
+Up/Down - Zoom
+Scroll Wheel - Zoom
+
 # Museum Model
 [Link to museum model](https://github.com/Lemoncreme/opengl-museum/blob/master/museum_final.blend)
+
+## Loading the Museum Model (28/3/2018)
+Picture of the loaded museum model:
+![pic of museum model](./ss_museum.png)
 
 # Screenshots
 ![](./ss_obj3.png)
