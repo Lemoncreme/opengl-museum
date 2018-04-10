@@ -1,3 +1,5 @@
 main
 Object.o
 *.swp
+*.o
+assimp*
