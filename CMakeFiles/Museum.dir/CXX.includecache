@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ben/git/opengl-museum/src/museum.cpp
+stdio.h
+-
+glad/glad.h
+-
+include/shader.h
+/home/ben/git/opengl-museum/src/include/shader.h
+

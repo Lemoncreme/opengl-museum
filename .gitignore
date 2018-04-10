@@ -1,5 +1,4 @@
-main
-Object.o
-*.swp
-*.o
-assimp*
+*.a
+Museum
+CMakeCache.txt
+cmake_install.cmake
