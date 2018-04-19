@@ -5,7 +5,12 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-// #include "include/shader.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#include "shader.h"
+#include "mesh.h"
+#include "model.h"
+#include "camera.h"
 
 using namespace std;
 

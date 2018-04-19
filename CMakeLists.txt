@@ -14,17 +14,7 @@ find_package(assimp REQUIRED)
 
 add_executable(Museum src/museum.cpp)
 
-#include_directories(
-	#	${LIB}/assimp-3.1.1/include/
-	#	)
-
-#set(ZLIB_LIBRARIES zlibstatic)
-#set(ENABLE_BOOST_WORKAROUND ON)
-#set(BUILD_STATIC_LIB ON)
-#set(BUILD_ASSIMP_TOOLS  ON)
-#set(ASSIMP_BUILD_STATIC_LIB ON)
-
-#add_subdirectory(${LIB}/assimp-3.1.1)
+include_directories(${INCLUDE} ${SOURCE} ${LIB})
 
 # GLAD
 set(GLAD_DIR "${LIB}/glad")

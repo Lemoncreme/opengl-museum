@@ -15,7 +15,7 @@ Scroll Wheel - Zoom
 - GLFW
 - GLAD (included)
 - OpenGL
-- Assimp (included)
+- assimp-devel
 - zziplib-devel
 - zlib-devel
 - minizip-devel
