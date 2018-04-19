@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/ben/git/opengl-museum
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,19 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named GLAD
-
-# Build rule for target.
-GLAD: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 GLAD
-.PHONY : GLAD
-
-# fast build rule for target.
-GLAD/fast:
-	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/build
-.PHONY : GLAD/fast
-
-#=============================================================================
 # Target rules for targets named Museum
 
 # Build rule for target.
@@ -136,32 +123,45 @@ Museum/fast:
 	$(MAKE) -f CMakeFiles/Museum.dir/build.make CMakeFiles/Museum.dir/build
 .PHONY : Museum/fast
 
-lib/glad.o: lib/glad.c.o
+#=============================================================================
+# Target rules for targets named glad
 
-.PHONY : lib/glad.o
+# Build rule for target.
+glad: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glad
+.PHONY : glad
+
+# fast build rule for target.
+glad/fast:
+	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/build
+.PHONY : glad/fast
+
+lib/glad/src/glad.o: lib/glad/src/glad.c.o
+
+.PHONY : lib/glad/src/glad.o
 
 # target to build an object file
-lib/glad.c.o:
-	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/lib/glad.c.o
-.PHONY : lib/glad.c.o
+lib/glad/src/glad.c.o:
+	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/lib/glad/src/glad.c.o
+.PHONY : lib/glad/src/glad.c.o
 
-lib/glad.i: lib/glad.c.i
+lib/glad/src/glad.i: lib/glad/src/glad.c.i
 
-.PHONY : lib/glad.i
+.PHONY : lib/glad/src/glad.i
 
 # target to preprocess a source file
-lib/glad.c.i:
-	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/lib/glad.c.i
-.PHONY : lib/glad.c.i
+lib/glad/src/glad.c.i:
+	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/lib/glad/src/glad.c.i
+.PHONY : lib/glad/src/glad.c.i
 
-lib/glad.s: lib/glad.c.s
+lib/glad/src/glad.s: lib/glad/src/glad.c.s
 
-.PHONY : lib/glad.s
+.PHONY : lib/glad/src/glad.s
 
 # target to generate assembly for a file
-lib/glad.c.s:
-	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/lib/glad.c.s
-.PHONY : lib/glad.c.s
+lib/glad/src/glad.c.s:
+	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/lib/glad/src/glad.c.s
+.PHONY : lib/glad/src/glad.c.s
 
 src/museum.o: src/museum.cpp.o
 
@@ -196,13 +196,13 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... GLAD"
 	@echo "... rebuild_cache"
 	@echo "... Museum"
-	@echo "... lib/glad.o"
-	@echo "... lib/glad.i"
-	@echo "... lib/glad.s"
+	@echo "... edit_cache"
+	@echo "... glad"
+	@echo "... lib/glad/src/glad.o"
+	@echo "... lib/glad/src/glad.i"
+	@echo "... lib/glad/src/glad.s"
 	@echo "... src/museum.o"
 	@echo "... src/museum.i"
 	@echo "... src/museum.s"

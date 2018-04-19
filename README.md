@@ -10,6 +10,16 @@ Up/Down - Zoom
 
 Scroll Wheel - Zoom
 
+# Requirements
+
+- GLFW
+- GLAD (included)
+- OpenGL
+- Assimp (included)
+- zziplib-devel
+- zlib-devel
+- minizip-devel
+
 # Museum Model
 [Link to museum model](https://github.com/Lemoncreme/opengl-museum/blob/master/museum_final.blend)
 Textured model:

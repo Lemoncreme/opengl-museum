@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/Museum.dir/src/museum.cpp.o  -o Museum 
+/usr/bin/c++     CMakeFiles/Museum.dir/src/museum.cpp.o  -o Museum -Wl,-rpath,/home/ben/git/opengl-museum libglad.so -ldl 
