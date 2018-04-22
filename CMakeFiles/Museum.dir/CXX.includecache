@@ -18,7 +18,7 @@ vector
 
 ./include/mesh.h
 glad/glad.h
-./include/glad/glad.h
+-
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -38,7 +38,7 @@ vector
 
 ./include/model.h
 glad/glad.h
-./include/glad/glad.h
+-
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -70,7 +70,7 @@ vector
 
 ./include/shader.h
 glad/glad.h
-./include/glad/glad.h
+-
 string
 -
 fstream
@@ -151,8 +151,6 @@ assimp/scene.h
 -
 assimp/postprocess.h
 -
-stb_image.h
-/home/ben/git/opengl-museum/src/stb_image.h
 shader.h
 /home/ben/git/opengl-museum/src/shader.h
 mesh.h

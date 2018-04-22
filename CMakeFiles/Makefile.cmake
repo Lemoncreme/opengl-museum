@@ -13,10 +13,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeLists.txt"
   "/usr/lib64/cmake/assimp-3.3/assimp-config-version.cmake"
   "/usr/lib64/cmake/assimp-3.3/assimp-config.cmake"
-  "/usr/lib64/cmake/glfw3/glfw3Config.cmake"
-  "/usr/lib64/cmake/glfw3/glfw3ConfigVersion.cmake"
-  "/usr/lib64/cmake/glfw3/glfw3Targets-noconfig.cmake"
-  "/usr/lib64/cmake/glfw3/glfw3Targets.cmake"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
@@ -32,11 +28,15 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/FindOpenGL.cmake"
   "/usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake/Modules/FindPackageMessage.cmake"
+  "/usr/share/cmake/Modules/FindPkgConfig.cmake"
   "/usr/share/cmake/Modules/Platform/Linux-GNU-C.cmake"
   "/usr/share/cmake/Modules/Platform/Linux-GNU-CXX.cmake"
   "/usr/share/cmake/Modules/Platform/Linux-GNU.cmake"
   "/usr/share/cmake/Modules/Platform/Linux.cmake"
   "/usr/share/cmake/Modules/Platform/UnixPaths.cmake"
+  "/usr/share/cmake/glm/glmConfig.cmake"
+  "/usr/share/cmake/glm/glmConfigVersion.cmake"
+  "/usr/share/cmake/glm/glmTargets.cmake"
   )
 
 # The corresponding makefile is:

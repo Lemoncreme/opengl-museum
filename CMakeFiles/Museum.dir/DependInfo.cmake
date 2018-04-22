@@ -13,6 +13,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "./include"
   "./src"
   "./lib"
+  "./resource"
   "./lib/glad/include"
   )
 

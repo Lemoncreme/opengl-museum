@@ -1,8 +1,8 @@
 // https://learnopengl.com/code_viewer_gh.php?code=includes/learnopengl/model.h
 #ifndef MODEL_H
 #define MODEL_H
-
-#include "glad/glad.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include <glad/glad.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
