@@ -3,5 +3,5 @@ Museum
 CMakeCache.txt
 cmake_install.cmake
 libGLAD.a
-CMakeFiles
+/CMakeFiles/*
 libglad.so
