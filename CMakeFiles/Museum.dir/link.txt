@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/Museum.dir/src/museum.cpp.o  -o Museum -Wl,-rpath,/home/ben/git/opengl-museum libglad.so -ldl -lassimp -lglfw /usr/lib64/libz.so -lminizip 
