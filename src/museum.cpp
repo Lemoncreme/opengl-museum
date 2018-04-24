@@ -51,10 +51,15 @@ int main(int argc, char **argv) {
 	glEnable(GL_DEPTH_TEST);
 
 	//Load everything
-	Model model("model/museum_final.blend");
+	Model model("resource/model.obj");
 	puts("Model created!");
 	Shader shader("src/shader.vs", "src/shader.fs");
 	puts("Shader created!");
+
+	//Pre-render logic
+	camera.Position.x = -0.11f;
+	camera.Position.y = -1.33f;
+	camera.Position.z = 2.3f;
 
 	//Render loop
 	while (!glfwWindowShouldClose(window)) {
@@ -89,8 +94,10 @@ int main(int argc, char **argv) {
 }
 
 void processInput(GLFWwindow *window) {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		printf("%f,%f,%f\n", camera.Position.x, camera.Position.y, camera.Position.z);
 		glfwSetWindowShouldClose(window, true);
+	}
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera.ProcessKeyboard(FORWARD, deltaTime);
