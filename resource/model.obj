@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: 'museum_final.blend'
 # www.blender.org
-mtllib museum_textured.mtl
+mtllib model.mtl
 o Map_Final_Mesh.002
 v -1.000000 4.000000 13.000000
 v 0.000000 4.000000 13.000000
