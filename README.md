@@ -1,26 +1,18 @@
 # CSE389 OpenGL Museum Project
 Nyna Dunning & Benjamin Mastripolito
 
-# How To Use
-Spacebar - Cycle through models
+## How To Use
+- Escape - Exit museum
+- Scroll Wheel - Zoom
+- WASD - Movement
 
-Mouse Click - Mouse click and drag to rotate models
-
-Up/Down - Zoom
-
-Scroll Wheel - Zoom
-
-# Museum Model
-[Link to museum model](https://github.com/Lemoncreme/opengl-museum/blob/master/museum_final.blend)
-Textured model:
+## Museum Model
+Fully textured model in Blender:
 ![](./media/museum_textured_blender.JPG)
+The model .blend file is located in `model/`
 
-# Screenshots
-![](./media/ss_obj3.png)
-![](./media/ss_obj2.png)
-![](./media/ss_obj1.png)
-![](./media/ss_tri2.png)
-![](./media/ss_tri1.png)
+## In-program Screenshots
+![](./media/sc1.jpg)
 
 ## Museum Plan
 
