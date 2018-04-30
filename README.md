@@ -1,6 +1,10 @@
 # CSE389 OpenGL Museum Project
 Nyna Dunning & Benjamin Mastripolito
 
+## Specification
+Call `cmake .` then `make` to compile. `./Museum` to run museum program. 
+Museum requires OpenGL 3.3 or higher.
+
 ## How To Use
 - Escape - Exit museum
 - Scroll Wheel - Zoom
@@ -26,3 +30,8 @@ The textures we will be using for our museum will be mostly concrete and other r
 Our sculpture will resemble a "found items" type artwork. We're not certain about the final shape, but it will be made up of smaller items. We plan to create our own models for this. 
 Finally, our paintings will include urban street art such as graffiti, murals, etc. 
 
+## Resources Used
+- [Single File Libraries](https://github.com/nothings/stb): stb_image.h
+- [Blender](https://www.blender.org)
+- [Dummy Model](https://www.turbosquid.com/3d-models/free-obj-mode-dummy/662719)
+- [Filter Forge](https://www.filterforge.com) for textures
