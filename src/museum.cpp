@@ -49,6 +49,7 @@ int main(int argc, char **argv) {
 
 	//Configure OpenGL state
 	glEnable(GL_DEPTH_TEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//Load everything
 	Model model("resource/museum.obj");
