@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
 	glEnable(GL_DEPTH_TEST);
 
 	//Load everything
-	Model model("resource/model.obj");
+	Model model("resource/museum.obj");
 	puts("Model created!");
 	Shader shader("src/shader.vs", "src/shader.fs");
 	puts("Shader created!");
