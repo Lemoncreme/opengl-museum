@@ -1,5 +1,5 @@
 # CSE389 OpenGL Museum Project
-Nyna Dunning & Benjamin Mastripolito
+Created by [Nyna Dunning](https://github.com/raikazz) & [Benjamin Mastripolito](https://github.com/Lemoncreme)
 
 ## Specification
 Call `cmake .` then `make` to compile. `./Museum` to run museum program. 
@@ -31,6 +31,7 @@ Our sculpture will resemble a "found items" type artwork. We're not certain abou
 Finally, our paintings will include urban street art such as graffiti, murals, etc. 
 
 ## Resources Used
+- [LearnOpenGL Libraries](https://learnopengl.com/): camera.h, shader.h, model.h, mesh.h in `include/`
 - [Single File Libraries](https://github.com/nothings/stb): stb_image.h
 - [Blender](https://www.blender.org)
 - [Dummy Model](https://www.turbosquid.com/3d-models/free-obj-mode-dummy/662719)
