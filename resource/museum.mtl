@@ -1,5 +1,5 @@
 # Blender MTL File: 'museum_final.blend'
-# Material Count: 8
+# Material Count: 9
 
 newmtl Concrete
 Ns 96.078431
@@ -23,17 +23,6 @@ d 1.000000
 illum 2
 map_Kd ../textures/concrete-edge-diffuse.jpg
 
-newmtl Material.001
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd ../textures/metal_lead_rough_basecolor.jpg
-
 newmtl Metal
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
@@ -45,7 +34,7 @@ d 1.000000
 illum 2
 map_Kd ../textures/metal_lead_rough_basecolor.jpg
 
-newmtl Metal_NONE
+newmtl Metal_dummy_wood.jpg
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.640000 0.640000
@@ -90,3 +79,27 @@ d 0.000000
 illum 2
 map_Kd ../textures/tag1.png
 map_d ../textures/tag1.png
+
+newmtl Tag3
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd ../textures/tag3.png
+map_d ../textures/tag3.png
+
+newmtl Tag4
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd ../textures/tag4.png
+map_d ../textures/tag4.png

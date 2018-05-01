@@ -5,6 +5,16 @@ Created by [Nyna Dunning](https://github.com/raikazz) & [Benjamin Mastripolito](
 Call `cmake .` then `make` to compile. `./Museum` to run museum program. 
 Museum requires OpenGL 3.3 or higher.
 
+## Requirements
+Requires the following libraries to compile properly:
+
+- Assimp
+- GLFW3
+- GLAD (included)
+
+## Notes
+All models including the paintings and the sculptures are included inside both `model/museum_final.blend` and `resource/museum.obj`.
+
 ## How To Use
 - Escape - Exit museum
 - Scroll Wheel - Zoom
@@ -35,4 +45,6 @@ Finally, our paintings will include urban street art such as graffiti, murals, e
 - [Single File Libraries](https://github.com/nothings/stb): stb_image.h
 - [Blender](https://www.blender.org)
 - [Dummy Model](https://www.turbosquid.com/3d-models/free-obj-mode-dummy/662719)
+- [Fire Hydrant Model](https://www.turbosquid.com/3d-models/free-hydrant-3d-model/1006257)
+- [Thinker Model](https://www.thingiverse.com/thing:34343)
 - [Filter Forge](https://www.filterforge.com) for textures
