@@ -89,8 +89,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
 illum 2
-map_Kd ../textures/tag3.png
-map_d ../textures/tag3.png
+map_Kd ../textures/tag4.png
+map_d ../textures/tag4.png
 
 newmtl Tag4
 Ns 96.078431
@@ -101,5 +101,5 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 0.000000
 illum 2
-map_Kd ../textures/tag4.png
-map_d ../textures/tag4.png
+map_Kd ../textures/tag3.png
+map_d ../textures/tag3.png
